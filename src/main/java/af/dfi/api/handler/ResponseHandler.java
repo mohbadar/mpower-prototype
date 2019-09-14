@@ -1,12 +1,5 @@
 package af.dfi.api.handler;
 
-import java.time.Instant;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Iterator;
-import javax.validation.ConstraintViolation;
-import javax.validation.ConstraintViolationException;
-
 import af.dfi.lang.enums.ExceptionType;
 import af.dfi.lang.exception.InternalServerProblemException;
 import af.dfi.lang.exception.ResourceNotFoundException;
@@ -26,6 +19,13 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.NoHandlerFoundException;
+
+import javax.validation.ConstraintViolation;
+import javax.validation.ConstraintViolationException;
+import java.time.Instant;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Iterator;
 
 
 @ControllerAdvice

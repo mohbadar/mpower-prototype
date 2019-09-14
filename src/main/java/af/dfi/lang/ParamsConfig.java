@@ -30,10 +30,21 @@ public class ParamsConfig {
     public static final String[] OAUTH_SECURITY_AUTHORITIES = {"ROLE_CLIENT", "ROLE_TRUSTED_CLIENT"};
     public static final String OAUTH_SECURITY_RESOURCE_ID = "oauth2-resource";
     public static final String[] OAUTH_AUTHORIZATION_GRANT_TYPE = {"client_credentials", "password"};
+    public static final String RESOURCE_ID = "resource_id";
 
     //****************** Interceptor Config Params *******************************//
     public static final String INTERCEPTOR_PATTERNS = "/host/**";
 
 
 
+//    Token Config
+
+    public static final long ACCESS_TOKEN_VALIDITY_SECONDS = 5*60*60;
+    public static final String SIGNING_KEY = "badar";
+    public static final String TOKEN_PREFIX = "Bearer ";
+    public static final String HEADER_STRING = "Authorization";
+
+
+    //********************************** KAFKA***********************************//
+    public static  final  String CONSUMER_GROUP_ID ="aalpr";
 }

@@ -1,12 +1,9 @@
 package af.dfi.lang.kafka;
 
-import com.fasterxml.jackson.databind.JsonSerializer;
-import com.fasterxml.jackson.databind.ser.std.StringSerializer;
-import java.util.HashMap;
-import java.util.Map;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.admin.NewTopic;
 import org.apache.kafka.clients.producer.ProducerConfig;
+import org.apache.kafka.common.serialization.StringSerializer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.kafka.KafkaProperties;
@@ -15,6 +12,10 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.kafka.core.DefaultKafkaProducerFactory;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.core.ProducerFactory;
+import org.springframework.kafka.support.serializer.JsonSerializer;
+
+import java.util.HashMap;
+import java.util.Map;
 
 
 @Configuration
@@ -27,6 +28,9 @@ public class ProducerConfiguration {
     @Value("${tpd.topic-name}")
     private String topicName;
 
+    @Value("${kafka.schema.url}")
+    private String schemaUrl;
+
     //producer configuration
     @Bean
     public Map<String, Object> producerConfigs() {
@@ -34,7 +38,8 @@ public class ProducerConfiguration {
         props.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG,
                 StringSerializer.class);
         props.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG,
-                AvroSerializer.class);
+                JsonSerializer.class);
+        props.put("schema.registry.url", schemaUrl);
         return props;
     }
 

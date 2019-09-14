@@ -1,6 +1,6 @@
-//package af.aalpr.lang.security;
+package af.dfi.lang.security;//package af.aalpr.lang.security;
 //
-//import af.dfi.isommogateway.core.service.CustomUserService;
+//import af.aalpr.service.service.CustomUserService;
 //import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.context.annotation.Bean;
 //import org.springframework.context.annotation.Configuration;

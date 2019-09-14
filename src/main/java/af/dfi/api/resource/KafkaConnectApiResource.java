@@ -1,32 +1,20 @@
 package af.dfi.api.resource;
-import java.io.IOException;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
 
 import af.dfi.api.handler.ResponseHandler;
+import af.dfi.core.kafka.connect.KafkaConnectIntegrationService;
 import af.dfi.lang.util.Utility;
-import af.dfi.service.kafka.connect.KafkaConnectIntegrationService;
 import org.json.JSONObject;
-import org.sourcelab.kafka.connect.apiclient.request.dto.ConnectorDefinition;
-import org.sourcelab.kafka.connect.apiclient.request.dto.ConnectorPlugin;
-import org.sourcelab.kafka.connect.apiclient.request.dto.ConnectorPluginConfigDefinition;
-import org.sourcelab.kafka.connect.apiclient.request.dto.ConnectorPluginConfigValidationResults;
-import org.sourcelab.kafka.connect.apiclient.request.dto.ConnectorStatus;
+import org.sourcelab.kafka.connect.apiclient.request.dto.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.io.IOException;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 
 @RestController
 @RequestMapping(value = "/api/integrations")

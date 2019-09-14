@@ -2,9 +2,6 @@ package af.dfi.lang.kafka;
 
 
 import af.dfi.lang.aspect.Loggable;
-import java.util.Arrays;
-import java.util.Map;
-import javax.xml.bind.DatatypeConverter;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.avro.generic.GenericRecord;
 import org.apache.avro.io.DatumReader;
@@ -14,6 +11,10 @@ import org.apache.avro.specific.SpecificDatumReader;
 import org.apache.avro.specific.SpecificRecordBase;
 import org.apache.kafka.common.errors.SerializationException;
 import org.apache.kafka.common.serialization.Deserializer;
+
+import javax.xml.bind.DatatypeConverter;
+import java.util.Arrays;
+import java.util.Map;
 
 @Slf4j
 public class AvroDeserializer<T extends SpecificRecordBase> implements Deserializer<T> {

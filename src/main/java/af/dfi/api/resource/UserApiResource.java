@@ -1,15 +1,18 @@
 package af.dfi.api.resource;
 
 import af.dfi.api.handler.ResponseHandler;
-import af.dfi.core.model.User;
-import af.dfi.service.service.UserService;
+import af.dfi.core.kafka.producer.UserProducer;
+import af.dfi.core.service.UserService;
+import af.dfi.data.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping(value = "/api/users")
@@ -17,6 +20,8 @@ public class UserApiResource extends ResponseHandler {
 
     @Autowired
     private UserService userService;
+    @Autowired
+    private UserProducer userProducer;
 
     @GetMapping(value = "", produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody
@@ -55,16 +60,25 @@ public class UserApiResource extends ResponseHandler {
     }
 
     @PostMapping(value = "", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public @ResponseBody ResponseEntity<User> save(@RequestBody(required = true) User user)
+    public @ResponseBody ResponseEntity<Map<String, Object>> save(@RequestBody(required = true) User user)
     {
-        return ResponseEntity.ok(userService.save(user));
+        Map<String, Object> data = new HashMap<>();
+        data.put("code", HttpStatus.ACCEPTED);
+        data.put("message", "Data has successfully sent to Kafka");
+        userProducer.produce(user);
+        return ResponseEntity.ok(data);
     }
 
     @PutMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public @ResponseBody ResponseEntity<User> update(@PathVariable(required = true, name = "id") String id, @RequestBody(required = true) User user)
+    public @ResponseBody ResponseEntity<Map<String,Object>> update(@PathVariable(required = true, name = "id") String id, @RequestBody(required = true) User user)
     {
+        //set id
         user.setId(id);
-        return ResponseEntity.ok(userService.save(user));
+        Map<String, Object> data = new HashMap<>();
+        data.put("code", HttpStatus.ACCEPTED);
+        data.put("message", "Data has successfully sent to Kafka");
+        userProducer.produce(user);
+        return ResponseEntity.ok(data);
     }
 
     @DeleteMapping(value = "/{id}" , produces = MediaType.APPLICATION_JSON_VALUE)

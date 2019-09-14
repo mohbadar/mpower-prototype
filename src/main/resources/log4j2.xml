@@ -45,7 +45,7 @@
     </Appenders>
 
     <Loggers>
-        <Logger name="af.dfi.logger" level="debug"
+        <Logger name="af.aalpr.logger" level="debug"
                 additivity="false">
             <AppenderRef ref="ConsoleAppender" />
             <!--<AppenderRef ref="FileAppender" />-->

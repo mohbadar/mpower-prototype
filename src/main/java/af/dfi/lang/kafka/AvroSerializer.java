@@ -1,9 +1,5 @@
 package af.dfi.lang.kafka;
 
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.util.Map;
-import javax.xml.bind.DatatypeConverter;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.avro.generic.GenericDatumWriter;
 import org.apache.avro.generic.GenericRecord;
@@ -14,7 +10,15 @@ import org.apache.avro.specific.SpecificRecordBase;
 import org.apache.kafka.common.errors.SerializationException;
 import org.apache.kafka.common.serialization.Serializer;
 
+import javax.xml.bind.DatatypeConverter;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.util.Map;
 
+/**
+ *
+ * @author hp 2018
+ */
 @Slf4j
 public class AvroSerializer<T extends SpecificRecordBase> implements Serializer<T> {
 

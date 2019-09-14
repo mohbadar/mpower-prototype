@@ -1,6 +1,6 @@
 package af.dfi.api.resource;
 
-import af.dfi.service.kafka.rest.KafkaTopicService;
+import af.dfi.core.kafka.rest.KafkaTopicService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;

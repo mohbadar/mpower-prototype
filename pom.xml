@@ -9,16 +9,16 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>af.dfi</groupId>
-	<artifactId>mpower-prototype</artifactId>
+	<artifactId>kafka-dev-template</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>mpower-prototype</name>
-	<description>Demo project for Spring Boot</description>
-
+	<name>kafka-dev-template</name>
+	<description>Development template with Spring boot, MongoDB and Kafka</description>
 	<properties>
 		<java.version>1.8</java.version>
 		<spring-cloud.version>Greenwich.RELEASE</spring-cloud.version>
 		<kafka.connect.client.version>2.1.0</kafka.connect.client.version>
 		<avro.version>1.9.0</avro.version>
+		<confluent.version>5.2.2</confluent.version>
 	</properties>
 
 	<dependencies>
@@ -41,6 +41,13 @@
 			<artifactId>spring-boot-starter-data-rest</artifactId>
 		</dependency>
 
+		<!-- JSON Web Token - JWT  -->
+		<dependency>
+			<groupId>io.jsonwebtoken</groupId>
+			<artifactId>jjwt</artifactId>
+			<version>0.9.1</version>
+		</dependency>
+
 		<!--Spring Security-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -51,6 +58,25 @@
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-oauth2</artifactId>
+		</dependency>
+
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+
+		<!--		Spring Security JWT-->
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-jwt</artifactId>
+			<version>1.0.10.RELEASE</version>
 		</dependency>
 
 		<!--Spring web-->
@@ -122,7 +148,7 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
 			<scope>runtime</scope>
-			<optional>true</optional>
+			<!--			<optional>true</optional>-->
 		</dependency>
 
 		<!--		Lombok-->
@@ -151,6 +177,26 @@
 			<artifactId>spring-kafka-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+
+		<!--		CSV Data Format-->
+		<dependency>
+			<groupId>com.fasterxml.jackson.dataformat</groupId>
+			<artifactId>jackson-dataformat-csv</artifactId>
+			<version>2.10.0.pr2</version>
+		</dependency>
+
+		<!--		Kafka Avro Serializer-->
+		<dependency>
+			<groupId>io.confluent</groupId>
+			<artifactId>kafka-avro-serializer</artifactId>
+			<version>${confluent.version}</version>
+		</dependency>
+
+		<!--		<dependency>-->
+		<!--			<groupId>io.confluent</groupId>-->
+		<!--			<artifactId>kafka-serializers</artifactId>-->
+		<!--			<version>${confluent.version}</version>-->
+		<!--		</dependency>-->
 
 		<!--		Doc for Rest apis-->
 		<dependency>
@@ -198,11 +244,32 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+
+
+<!--			<plugin>-->
+<!--				<groupId>org.apache.avro</groupId>-->
+<!--				<artifactId>avro-maven-plugin</artifactId>-->
+<!--				<version>${avro.version}</version>-->
+<!--				<executions>-->
+<!--					<execution>-->
+<!--						<phase>generate-sources</phase>-->
+<!--						<goals>-->
+<!--							<goal>schema</goal>-->
+<!--						</goals>-->
+<!--						<configuration>-->
+<!--							<sourceDirectory>${project.basedir}/src/main/resources/avro/</sourceDirectory>-->
+<!--							<outputDirectory>${project.build.directory}/generated/avro</outputDirectory>-->
+<!--						</configuration>-->
+<!--					</execution>-->
+<!--				</executions>-->
+<!--			</plugin>-->
+
 		</plugins>
 	</build>
 
 
 	<repositories>
+
 		<repository>
 			<id>jcenter-snapshots</id>
 			<name>jcenter</name>
@@ -214,6 +281,12 @@
 			<name>Spring Milestones</name>
 			<url>https://repo.spring.io/milestone</url>
 		</repository>
+
+		<repository>
+			<id>confluent</id>
+			<url>http://packages.confluent.io/maven/</url>
+		</repository>
+
 	</repositories>
 
 	<dependencyManagement>
@@ -227,6 +300,4 @@
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
-
-
 </project>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Configuration status="INFO" monitorInterval="30">
+<Configuration status="debug" monitorInterval="30">
     <Properties>
         <Property name="LOG_PATTERN">
 
@@ -13,8 +13,15 @@
             <PatternLayout pattern="[%highlight{%-5level}] %d{DEFAULT}  %c{1}.%M() - %msg%n%throwable{short.lineNumber}"/>
         </Console>
 
+        <Kafka name="Kafka" topic="aalpr.logs">
+            <PatternLayout>
+                <Pattern>${LOG_PATTERN}</Pattern>
+            </PatternLayout>
+            <Property name="bootstrap.servers">localhost:9092</Property>
+        </Kafka>
+
         <!-- Rolling File Appender -->
-        <!--        <RollingFile name="FileAppender" fileName="logs/logs.log"
+        <RollingFile name="FileAppender" fileName="logs/logs.log"
                              filePattern="logs/logs-%d{yyyy-MM-dd}-%i.log">
                     <PatternLayout>
                         <Pattern>${LOG_PATTERN}</Pattern>
@@ -24,7 +31,7 @@
                         <SizeBasedTriggeringPolicy size="10MB" />
                     </Policies>
                     <DefaultRolloverStrategy max="10"/>
-                </RollingFile>-->
+        </RollingFile>
 
         <!-- SMTP Appender
        <SMTP name="MailAppender"
@@ -48,10 +55,14 @@
         <Logger name="af.aalpr.logger" level="debug"
                 additivity="false">
             <AppenderRef ref="ConsoleAppender" />
-            <!--<AppenderRef ref="FileAppender" />-->
+            <AppenderRef ref="Kafka" />
+            <AppenderRef ref="FileAppender" />
         </Logger>
 
-        <Root level="info">
+        <Logger name="org.apache.kafka" level="INFO" /> <!-- avoid recursive logging -->
+
+        <Root level="debug">
+            <AppenderRef ref="Kafka"/>
             <AppenderRef ref="ConsoleAppender" />
             <AppenderRef ref="FileAppender" />
         </Root>

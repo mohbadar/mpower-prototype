@@ -1,7 +1,7 @@
 package af.dfi.core.kafka.consumer;
 
 import af.dfi.core.service.AgentLocationService;
-import af.dfi.data.model.AgentLocation;
+import af.dfi.data.model.TerminalAddress;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.annotation.KafkaListener;
@@ -20,9 +20,9 @@ public class AgentLocationConsumer {
     @Autowired private KafkaTemplate kafkaTemplate;
 
     @KafkaListener(topics = {AGENT_LOCATION_TOPIC}, groupId = CONSUMER_GROUP_ID)
-    public void consume(AgentLocation agentLocation)
+    public void consume(TerminalAddress terminalAddress)
     {
-        log.info("CONSUMED DATA"+ agentLocation.toString());
-        agentLocationService.save(agentLocation);
+        log.info("CONSUMED DATA"+ terminalAddress.toString());
+        agentLocationService.save(terminalAddress);
     }
 }

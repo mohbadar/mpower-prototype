@@ -42,7 +42,7 @@ public class AuthDataInitailizer {
             admin.setUsername("admin");
             admin.setPhone("0794035544");
             admin.setRoles(createRolesIfNotExist());
-            admin.setPassword("admin1235");
+            admin.setPassword("admin");
 
             userService.save(admin);
         }

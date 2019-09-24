@@ -1,6 +1,6 @@
 package af.dfi.core.service;
 
-import af.dfi.data.model.AgentLocation;
+import af.dfi.data.model.TerminalAddress;
 import af.dfi.data.repository.AgentLocationRepository;
 import af.dfi.lang.aspect.Loggable;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,19 +16,19 @@ public class AgentLocationService {
 
     @Loggable
     @Retryable
-    public AgentLocation save(AgentLocation agentLocation)
+    public TerminalAddress save(TerminalAddress terminalAddress)
     {
-        return agentLocationRepository.save(agentLocation);
+        return agentLocationRepository.save(terminalAddress);
     }
 
     @Loggable
-    public List<AgentLocation> findAll()
+    public List<TerminalAddress> findAll()
     {
         return agentLocationRepository.findAll();
     }
 
     @Loggable
-    public AgentLocation findById(String id)
+    public TerminalAddress findById(String id)
     {
         return agentLocationRepository.findById(id).get();
     }
@@ -42,7 +42,7 @@ public class AgentLocationService {
     }
 
     @Loggable
-    public List<AgentLocation> findByCity(String cityName)
+    public List<TerminalAddress> findByCity(String cityName)
     {
         return agentLocationRepository.findByCity(cityName);
     }

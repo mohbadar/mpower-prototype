@@ -1,41 +1,51 @@
-package af.dfi.core.service;//package af.aalpr.service.service;
+package af.dfi.core.service;
 
+
+import af.dfi.data.model.Privilege;
+import af.dfi.data.model.Role;
+import af.dfi.data.repository.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.AuthorityUtils;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
+import java.util.stream.Collectors;
 
-import af.dfi.data.model.Privilege;
-import af.dfi.data.model.Role;
-import af.dfi.data.model.User;
-import af.dfi.data.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.stereotype.Service;
-
-
-@Service
-public class CustomDigestUserService implements UserDetailsService {
+@Component
+public class CustomUserDetailsService implements UserDetailsService {
 
     @Autowired
-    private UserRepository userRepository;
+    private UserRepository repo;
 
-//    @Autowired
-//    private BCryptPasswordEncoder passwordEncoder;
-
-//    public User findByEmail(String email) {
-//        return userRepository.findByEmail(email);
-//    }
-
+    @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        System.out.println("Entry to CustomDigestUserServiceImpl: " + username);
+//        return repo
+//                .findByUsername(username).map(u -> User(
+//                u.getUsername(),
+//                u.getPassword(),
+//                u.isActive(),
+//                u.isActive(),
+//                u.isActive(),
+//                u.isActive(),
+//                AuthorityUtils.createAuthorityList(
+//                        u.getRoles()
+//                                .stream()
+//                                .map(r -> "ROLE_" + r.getName().toUpperCase())
+//                                .collect(Collectors.toList())
+//                                .toArray(new String[]{}))))
+//                .orElseThrow(() -> new UsernameNotFoundException("No user with "
+//                + "the name " + username + "was found in the database"));
 
-        User user = userRepository.findByUsername(username);
+        af.dfi.data.model.User user = repo.findByUsername(username);
         if (user == null) {
             throw new UsernameNotFoundException("Invalid username or password.");
         }
@@ -47,6 +57,7 @@ public class CustomDigestUserService implements UserDetailsService {
 
         return userDetails;
     }
+
 
     private Collection<? extends GrantedAuthority> getAuthorities(Collection<Role> roles) {
         // make a hashset to remove the duplicated roles
@@ -77,4 +88,5 @@ public class CustomDigestUserService implements UserDetailsService {
         }
         return authorities;
     }
+
 }

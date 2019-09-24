@@ -1,5 +1,6 @@
 package af.dfi.data.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
@@ -32,6 +33,7 @@ public class User {
     @Field
     @Indexed(unique = true, name = "username")
     private String username;
+    @JsonIgnore
     private String password;
     private boolean enabled;
     @DBRef

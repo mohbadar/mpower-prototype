@@ -24,7 +24,7 @@ public class NumberOfCodeLineCounter {
                         if (file.isDirectory()) {
                             folderList.add(file);
                         } else if (file.getName().endsWith(".java")
-                                || file.getName().endsWith(".sql")) {
+                                || file.getName().endsWith(".sql") || file.getName().endsWith(".ts")) {
                             long lineCount = 0;
                             final Scanner scanner = new Scanner(file);
                             while (scanner.hasNextLine()) {

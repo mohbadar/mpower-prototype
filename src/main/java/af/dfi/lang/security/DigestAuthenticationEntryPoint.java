@@ -1,9 +1,8 @@
-package af.dfi.lang.security;//package af.aalpr.lang.security;
+//package af.dfi.lang.security;//package af.aalpr.lang.security;
 //
 //import org.springframework.context.annotation.Primary;
 //import org.springframework.http.HttpStatus;
 //import org.springframework.security.core.AuthenticationException;
-//import org.springframework.security.web.authentication.www.DigestAuthenticationEntryPoint;
 //import org.springframework.stereotype.Component;
 //
 //import javax.servlet.ServletException;

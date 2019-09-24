@@ -47,4 +47,6 @@ public class ParamsConfig {
 
     //********************************** KAFKA***********************************//
     public static  final  String CONSUMER_GROUP_ID ="aalpr";
+
+
 }

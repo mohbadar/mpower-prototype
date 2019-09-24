@@ -12,8 +12,8 @@ import javax.validation.constraints.NotNull;
 @AllArgsConstructor
 @ToString
 @EqualsAndHashCode
-@Document(collection = "agent_location_test")
-public class AgentLocation {
+@Document(collection = "terminal_location")
+public class TerminalAddress {
 
     @Id
     private String id;

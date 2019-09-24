@@ -12,8 +12,8 @@ import org.springframework.data.mongodb.core.mapping.Field;
 @AllArgsConstructor
 @ToString
 @EqualsAndHashCode
-@Document(collection = "agent_location")
-public class Agent {
+@Document(collection = "camera")
+public class Camera {
 
     @Id
     private String id;
@@ -24,12 +24,6 @@ public class Agent {
 
     @Field(value = "description")
     private String description;
-
-    @Field(value = "ip")
-    private String ip;
-
-    @Field(value = "port")
-    private String port;
 
     @Field(value = "cordinate_longtitude")
     private String longtitute;

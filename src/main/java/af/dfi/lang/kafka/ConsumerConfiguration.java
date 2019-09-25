@@ -38,7 +38,7 @@ public class ConsumerConfiguration {
         );
 //        props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "http://localhost:2181");
         props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG,
-                JsonDeserializer.class);
+                StringDeserializer.class);
         props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG,
                 JsonDeserializer.class);
         props.put("schema.registry.url", schemaUrl);
@@ -50,9 +50,15 @@ public class ConsumerConfiguration {
     public ConsumerFactory<String, Object> consumerFactory() {
         final JsonDeserializer<Object> jsonDeserializer = new JsonDeserializer<>();
         jsonDeserializer.addTrustedPackages("af.aalpr.data.model");
+
+//        DefaultKafkaConsumerFactory<String, Object> consumerFactory =
+//                new DefaultKafkaConsumerFactory<String, Object>(consumerConfigs(),
+//                        new StringDeserializer(), new JsonDeserializer<>());
+
         return new DefaultKafkaConsumerFactory<>(
                 kafkaProperties.buildConsumerProperties(), new JsonDeserializer<>(), jsonDeserializer
         );
+//        return consumerFactory;
     }
 
     @Bean
